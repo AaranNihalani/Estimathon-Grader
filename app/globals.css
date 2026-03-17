@@ -1,0 +1,31 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body, #__next {
+  height: 100%;
+}
+
+body {
+  color: #e5e7eb; /* slate-200 */
+  background: #0b1020; /* subdued neutral */
+}
+
+.glass {
+  @apply bg-slate-900/70 backdrop-blur-sm border border-slate-800 rounded-xl shadow;
+}
+
+/* Presenter mode */
+html.presenter .site-header,
+html.presenter .site-footer {
+  display: none !important;
+}
+html.presenter main {
+  padding-top: 0;
+}
+html.presenter .scoreboard {
+  font-size: 1.125rem; /* bump for projection */
+}
+html.presenter .scoreboard .scoreboard-members {
+  display: none;
+}

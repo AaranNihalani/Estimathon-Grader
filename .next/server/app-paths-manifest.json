@@ -1,0 +1,6 @@
+{
+  "/rules/page": "app/rules/page.js",
+  "/page": "app/page.js",
+  "/api/rules-pdf/route": "app/api/rules-pdf/route.js",
+  "/admin/page": "app/admin/page.js"
+}
