@@ -76,7 +76,7 @@ export default function Page() {
                   <td className="py-3 pr-4 text-slate-400 text-xs max-w-xs truncate scoreboard-members">
                     {team.members.length ? team.members.join(', ') : '—'}
                   </td>
-                  <td className="py-3 pr-4 text-right tabular-nums">{result.score.toFixed(4)}</td>
+                  <td className="py-3 pr-4 text-right tabular-nums">{result.score.toFixed(1)}</td>
                   <td className="py-3 pr-4 text-right">{result.correctCount}</td>
                   <td className="py-3 pr-4 text-right">{result.wrongOrBlank}</td>
                 </tr>

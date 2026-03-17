@@ -156,11 +156,6 @@ export default function AdminPage() {
       </section>
 
       <section className="glass p-6">
-        <h2 className="text-xl font-semibold text-slate-100">Interval Entry</h2>
-        <p className="text-white/60 text-sm">For entering intervals, please use the Entry tab to avoid clutter.</p>
-      </section>
-
-      <section className="glass p-6">
         <h2 className="text-xl font-semibold text-red-300">Danger Zone</h2>
         <p className="text-slate-400 text-sm">Reset will permanently clear all teams, submissions, and answers on this device.</p>
         <button

@@ -13,7 +13,7 @@ export default function EntryPage() {
   }, [])
 
   const [teamId, setTeamId] = useState<string | null>(null)
-  const team = useMemo<Team | undefined>(() => state.teams.find(t => t.id === teamId ?? ''), [state.teams, teamId])
+  const team = useMemo<Team | undefined>(() => state.teams.find(t => t.id === (teamId ?? '')), [state.teams, teamId])
   const slipsRemaining = team ? state.config.maxSubmissionsPerTeam - team.submissions.length : 0
 
   return (
@@ -56,7 +56,7 @@ export default function EntryPage() {
                     <div className="text-xs text-slate-400">{last ? `[${last.min}, ${last.max}]` : '—'}</div>
                   </div>
                   <form
-                    className="flex gap-2"
+                    className="grid grid-cols-[1fr,1fr,auto] gap-2 items-center"
                     onSubmit={(e) => {
                       e.preventDefault()
                       if (slipsRemaining <= 0) return
@@ -69,11 +69,11 @@ export default function EntryPage() {
                       }
                     }}
                   >
-                    <input type="number" step="any" min={0} name="min" placeholder="min" className="flex-1 bg-slate-900/80 border border-slate-700 rounded px-2 py-1 text-sm" />
-                    <input type="number" step="any" min={0} name="max" placeholder="max" className="flex-1 bg-slate-900/80 border border-slate-700 rounded px-2 py-1 text-sm" />
+                    <input type="number" step="any" min={0} name="min" placeholder="min" className="min-w-0 w-full bg-slate-900/80 border border-slate-700 rounded px-2 py-1 text-sm" />
+                    <input type="number" step="any" min={0} name="max" placeholder="max" className="min-w-0 w-full bg-slate-900/80 border border-slate-700 rounded px-2 py-1 text-sm" />
                     <button
                       disabled={slipsRemaining <= 0}
-                      className="bg-brand-600 hover:bg-brand-500 disabled:opacity-40 px-3 py-1 rounded text-sm text-white"
+                      className="whitespace-nowrap bg-brand-600 hover:bg-brand-500 disabled:opacity-40 px-3 py-1 rounded text-sm text-white"
                     >
                       Submit
                     </button>
