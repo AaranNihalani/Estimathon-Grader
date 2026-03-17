@@ -1,55 +1,8 @@
 'use client'
 
 import { useEffect, useMemo, useState } from 'react'
-import { AppState, Problem, Team } from '../../lib/types'
-import { addTeam, addTeamWithMembers, loadState, removeTeam, renameTeam, resetState, setAnswer, setTeamMembers, submitInterval, updateConfig } from '../../lib/state'
-import { lastSubmissionFor } from '../../lib/scoring'
-
-function TeamRow({ team, problems, onSubmit }: { team: Team, problems: Problem[], onSubmit: (p: { teamId: string, problemId: string, min: number, max: number }) => void }) {
-  return (
-    <div className="glass p-4">
-      <div className="flex items-center justify-between">
-        <div>
-          <div className="font-semibold text-slate-50">{team.name}</div>
-          <div className="text-xs text-slate-400 mt-1">
-            {team.members.length ? team.members.join(', ') : 'No members recorded'}
-          </div>
-        </div>
-        <div className="text-xs text-slate-400">{team.submissions.length} submissions</div>
-      </div>
-      <div className="mt-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-        {problems.map(p => {
-          const last = lastSubmissionFor(team, p.id)
-          return (
-            <div key={p.id} className="p-3 border border-slate-800 rounded-lg bg-slate-900/60">
-              <div className="flex items-center justify-between mb-2">
-                <div className="text-sm text-slate-100">Problem {p.number}</div>
-                <div className="text-xs text-slate-400">{last ? `[${last.min}, ${last.max}]` : '—'}</div>
-              </div>
-              <form
-                className="flex gap-2"
-                onSubmit={(e) => {
-                  e.preventDefault()
-                  const data = new FormData(e.currentTarget as HTMLFormElement)
-                  const min = parseFloat(String(data.get('min') || ''))
-                  const max = parseFloat(String(data.get('max') || ''))
-                  if (Number.isFinite(min) && Number.isFinite(max) && min > 0 && max >= min) {
-                    onSubmit({ teamId: team.id, problemId: p.id, min, max })
-                    ;(e.target as HTMLFormElement).reset()
-                  }
-                }}
-              >
-                <input type="number" step="any" min={0} name="min" placeholder="min" className="flex-1 bg-slate-900/80 border border-slate-700 rounded px-2 py-1 text-sm" />
-                <input type="number" step="any" min={0} name="max" placeholder="max" className="flex-1 bg-slate-900/80 border border-slate-700 rounded px-2 py-1 text-sm" />
-                <button className="bg-brand-600 hover:bg-brand-500 px-3 py-1 rounded text-sm text-white">Submit</button>
-              </form>
-            </div>
-          )
-        })}
-      </div>
-    </div>
-  )
-}
+import { AppState } from '../../lib/types'
+import { addTeamWithMembers, loadState, removeTeam, renameTeam, resetState, setAnswer, setTeamMembers, updateConfig } from '../../lib/state'
 
 export default function AdminPage() {
   const [state, setState] = useState<AppState>(() => loadState())
